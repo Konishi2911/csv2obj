@@ -4,6 +4,7 @@
 #include "StringSplitter.hpp"
 #include "FileFormatError.hpp"
 
+#include <filesystem>
 #include <vector>
 #include <string>
 #include <fstream>
