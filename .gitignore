@@ -1,0 +1,5 @@
+# ignore vscode configuration files
+.vscode/
+build/
+
+.DS_Store
