@@ -1,6 +1,6 @@
 file(GLOB Source *.cpp)
 
-add_library( SeparatedValues SHARED ${Source})
+add_library( SeparatedValues STATIC ${Source})
 
 
 target_include_directories(
