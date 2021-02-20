@@ -20,6 +20,7 @@ public:
     static Surface makeSurface(const std::string&);
 private:
     Curve2D curve_;
+    double offset_ = 0.0;
     Surface surface_;
 
 public:
@@ -27,8 +28,14 @@ public:
     CurveExtruder();
 
     // Construct with given source curve and a given surface where to place it.
-    CurveExtruder(const Curve2D& curve, Surface surf): curve_(curve), surface_(surf) {} 
-    CurveExtruder(const Curve2D&& curve, Surface surf): curve_(curve), surface_(surf) {} 
+    CurveExtruder(const Curve2D& curve, Surface surf, double offset = 0.0): 
+        curve_(curve), 
+        surface_(surf),
+        offset_(offset) {} 
+    CurveExtruder(const Curve2D&& curve, Surface surf, double offset = 0.0): 
+        curve_(curve), 
+        surface_(surf),
+        offset_(offset) {} 
 
 
     // set given curve with the surface where to place it.

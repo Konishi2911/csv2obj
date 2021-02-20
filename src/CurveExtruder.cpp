@@ -18,33 +18,33 @@ STool::Geometry STool::CurveExtruder::extrude(double length) {
     for (auto point: curve_.verticesList()) {
         switch (this->surface_) {
             case xy:
-            vertices.emplace_back(point.x, point.y, 0.0);
-            vertices.emplace_back(point.x, point.y, length);
+            vertices.emplace_back(point.x, point.y, offset_);
+            vertices.emplace_back(point.x, point.y, length - offset_);
             break;
 
             case yx:
-            vertices.emplace_back(point.y, point.x, 0.0);
-            vertices.emplace_back(point.y, point.x, length);
+            vertices.emplace_back(point.y, point.x, offset_);
+            vertices.emplace_back(point.y, point.x, length - offset_);
             break;
 
             case yz:
             vertices.emplace_back(0.0, point.x, point.y);
-            vertices.emplace_back(length, point.x, point.y);
+            vertices.emplace_back(length - offset_, point.x, point.y);
             break;
 
             case zy:
-            vertices.emplace_back(0.0, point.y, point.x);
-            vertices.emplace_back(length, point.y, point.x);
+            vertices.emplace_back(offset_, point.y, point.x);
+            vertices.emplace_back(length - offset_, point.y, point.x);
             break;
 
             case zx:
-            vertices.emplace_back(point.y, 0.0, point.x);
-            vertices.emplace_back(point.y, length, point.x);
+            vertices.emplace_back(point.y, offset_, point.x);
+            vertices.emplace_back(point.y, length - offset_, point.x);
             break;
 
             case xz:
-            vertices.emplace_back(point.x, 0.0, point.y);
-            vertices.emplace_back(point.x, length, point.y);
+            vertices.emplace_back(point.x, offset_, point.y);
+            vertices.emplace_back(point.x, length - offset_, point.y);
             break;
         }
     }

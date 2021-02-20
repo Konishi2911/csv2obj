@@ -21,6 +21,10 @@ int main(int argc, char* argv[]) {
         "The surface to place a outline curve by csv.",
         true 
     );
+    argParser.setOption('o', "offset",
+        "offset of the surface to place import csv.",
+        true 
+    );
 
     argParser.parse(argc, argv);
 
@@ -34,6 +38,9 @@ int main(int argc, char* argv[]) {
         auto surface = argParser.exists("s")? 
             argParser.getValue<Surface>("s", STool::CurveExtruder::makeSurface): 
             Surface::xy;
+        auto offset = argParser.exists("o")?
+            argParser.getValue<double>("o"):
+            0.0;
         auto args = argParser.getArgs();
 
         // Get required arguments.
@@ -42,7 +49,7 @@ int main(int argc, char* argv[]) {
 
         // Extrusion of CSV.
         CTool::DoubleSV csv(csvPath);
-        STool::CurveExtruder extruder(STool::Curve2D(csv, true), surface);
+        STool::CurveExtruder extruder(STool::Curve2D(csv, true), surface, offset);
 
         auto obj = extruder.extrude(length);
         obj.output(objPath);
