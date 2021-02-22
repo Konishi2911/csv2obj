@@ -85,6 +85,11 @@ public:
 private:
     // - Private Member Functions
 
+    // Check utf-8 BOM
+    static bool checkBOM_(const std::string&);
+
+    static void removeBOM_(std::string&);
+
     // 
     std::vector<std::vector<Type>> makeRecords(const std::vector<std::vector<std::string>>&);
 
@@ -96,6 +101,10 @@ private:
 };
 
 }
+
+// ============================================================= //
+// - IMPLEMENTATION
+// ============================================================= //
 
 
 // - Comstructors
@@ -114,7 +123,14 @@ CTool::SeparatedValues<Type>::SeparatedValues(
             std::istreambuf_iterator<char>()
         );
 
+        // Empty check
         if (dataStr.empty())  throw FileFormatError("Loaded file was empty.");
+
+        // BOM (Bite Order Mark) Recognization.
+        if (checkBOM_(dataStr)) {
+            /* std::cout << "Removing BOM..." << std::endl; */
+            dataStr.erase(0, 3);
+        }
 
         auto dataStrVec = splitter.split(dataStr);
 
@@ -193,6 +209,21 @@ int CTool::SeparatedValues<Type>::nCols() const {
 
 
 // - Mamber Functions
+
+template<typename Type>
+bool CTool::SeparatedValues<Type>::checkBOM_(const std::string& str) {
+    constexpr int BOM[] = {0xEF, 0xBB, 0xBF}; 
+    constexpr auto bomLength = 3;
+
+    if (str.size() <= 2) return false;
+
+    bool hasBom = true;
+    for (auto i = 0; i < bomLength; ++i) {
+        hasBom &= str[i] == static_cast<char>(BOM[i]);
+    }
+    return hasBom;
+}
+
 
 template<typename Type>
 bool CTool::SeparatedValues<Type>::withHeader() const {
