@@ -30,12 +30,12 @@ public:
     // Construct with given source curve and a given surface where to place it.
     CurveExtruder(const Curve2D& curve, Surface surf, double offset = 0.0): 
         curve_(curve), 
-        surface_(surf),
-        offset_(offset) {} 
+        offset_(offset),
+        surface_(surf) {}
     CurveExtruder(const Curve2D&& curve, Surface surf, double offset = 0.0): 
         curve_(curve), 
-        surface_(surf),
-        offset_(offset) {} 
+        offset_(offset), 
+        surface_(surf) {}
 
 
     // set given curve with the surface where to place it.

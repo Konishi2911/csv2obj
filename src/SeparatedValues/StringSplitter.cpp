@@ -34,7 +34,8 @@ CTool::StringSplitter::splitWithLFCode(const std::string& source) {
     else if (source.find(this->lf_mac) != std::string::npos) {
         return splitByDelimiter(source, lf_mac);
     } 
-    else if (source.find(this->lf_unix) != std::string::npos) {
+    //else if (source.find(this->lf_unix) != std::string::npos) {
+    else {
         return splitByDelimiter(source, lf_unix);
     }
 }

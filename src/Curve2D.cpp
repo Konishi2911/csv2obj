@@ -1,8 +1,8 @@
 #include "Curve2D.hpp"
 
 STool::Curve2D::Curve2D(const CTool::DoubleSV& csv, bool close):
-    verts_(),
-    name_(csv.name())
+    name_(csv.name()),
+    verts_()
 {
     auto nPoints = csv.nRows();
     for (auto i = 0; i < nPoints; ++i) {

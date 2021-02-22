@@ -12,7 +12,7 @@ namespace STool {
 class Curve2D {
 private:
     std::string name_;
-   std::vector<Vector2D> verts_; 
+    std::vector<Vector2D> verts_; 
    
 public:
     // Construct as empty curve.
